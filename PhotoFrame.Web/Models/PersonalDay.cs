@@ -13,7 +13,8 @@ namespace PhotoFrame.Web.Models
         public int Month { get; set; }
         public int Day { get; set; }
         public int OriginalYear { get; set; }
-        
+
+        public virtual ApplicationUser User { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
 
     }

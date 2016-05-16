@@ -15,6 +15,8 @@ namespace PhotoFrame.Web.Models
         public string MimeType { get; set; }
         public string FileExtension { get; set; }
 
+        public virtual ApplicationUser User { get; set; }
+        public virtual ICollection<Attributes> Attributes {get; set; }
         public virtual ICollection<Holiday> Holidays { get; set; }
         public virtual ICollection<PersonalDay> PersonalDays { get; set; }
 

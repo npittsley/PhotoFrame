@@ -7,6 +7,12 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
+using System.Data.Entity;
+
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using PhotoFrame.Web.Models;
+
 namespace PhotoFrame.Web
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -18,6 +24,7 @@ namespace PhotoFrame.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Database.SetInitializer<ApplicationDbContext>(new PhotoInitializer());
         }
     }
 }

@@ -58,3 +58,6 @@ C:\development\projects\PhotoFrame\PhotoFrame.Web\bin\Microsoft.Owin.Security.Tw
 C:\development\projects\PhotoFrame\PhotoFrame.Web\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\development\projects\PhotoFrame\PhotoFrame.Web\obj\Debug\PhotoFrame.Web.dll
 C:\development\projects\PhotoFrame\PhotoFrame.Web\obj\Debug\PhotoFrame.Web.pdb
+C:\development\Projects\PhotoFrame\PhotoFrame.Web\bin\CsvHelper.dll
+C:\development\Projects\PhotoFrame\PhotoFrame.Web\bin\CsvHelper.xml
+C:\development\Projects\PhotoFrame\PhotoFrame.Web\obj\Debug\PhotoFrame.Web.csprojResolveAssemblyReference.cache
