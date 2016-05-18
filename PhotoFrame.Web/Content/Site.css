@@ -40,3 +40,12 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+.smallImage{
+    max-width:60px;
+}
+.mediumImage{
+    max-width:120px;
+}
+.largeImage{
+    max-width:240px;
+}

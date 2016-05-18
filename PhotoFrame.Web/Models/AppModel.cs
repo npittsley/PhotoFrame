@@ -10,16 +10,14 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace PhotoFrame.Web.Models
 {
-    public class ApplicationUser : IdentityUser
-    {
-
-        public virtual ICollection<Photo> Photos { get; set; }
-        public virtual ICollection<PersonalDay> PersonalDays { get; set; }
+    public class ApplicationUser : IdentityUser{
 
         public virtual UserProfile Profile { get; set; }
+        
+        public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<PersonalDay> PersonalDays { get; set; }
     }
-    public class UserProfile
-    {
+    public class UserProfile{
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

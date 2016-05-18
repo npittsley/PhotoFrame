@@ -28,11 +28,13 @@ namespace PhotoFrame.Web
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1796002987297273",
+               appSecret: "0231e99c26f076e8b3972d2706bae1de");
 
-            //app.UseGoogleAuthentication();
+            app.UseGoogleAuthentication(
+        clientId: "645116578752-4l80th5o3hmnmiv8d5mrgfl760fhpql4.apps.googleusercontent.com",
+        clientSecret: "T2xvS-_MU72oYiQ-n_OzcZB8");
         }
     }
 }

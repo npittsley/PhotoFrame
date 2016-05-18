@@ -6,6 +6,7 @@ using System.Reflection;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Text;
+
 using System.Data.Entity.Migrations;
 
 using CsvHelper;
@@ -86,7 +87,7 @@ namespace PhotoFrame.Web.Models
         private void InitHolidays(ApplicationDbContext context)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            string resourceName = "PhotoFrame.Web.Models.SeedData.USHolidays.csv";
+            string resourceName = "PhotoFrame.Web.App_Data.USHolidays.csv";
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             {
                 using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
