@@ -39,7 +39,7 @@
 
 @foreach (var item in Model) {
     <tr>
-        @if (item.Bytes.Length > 0)
+        @if (item!=null)
         {
             <td>
                 <img src="~/File?id=@item.Id" alt="avatar" class="smallImage" />

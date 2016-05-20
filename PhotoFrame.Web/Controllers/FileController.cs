@@ -20,7 +20,7 @@ namespace PhotoFrame.Web.Controllers
             if (file.Bytes == null || file.Bytes.Length == 0)
             {
                 //Student student = db.Students.Include(s => s.Files).SingleOrDefault(s => s.ID == id);
-                Photo missingFile = db.Photos.First(p => p.FriendlyName == "FileNotFound");
+                Photo missingFile = db.Photos.First(p => p.FriendlyName == "Photo Not Found");
                 //var missingFile = db.Photos.Find(1);
                 retVal = File(missingFile.Bytes, missingFile.MimeType);
             }

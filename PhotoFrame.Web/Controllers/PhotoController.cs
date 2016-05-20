@@ -11,6 +11,8 @@ using PhotoFrame.Web.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using PhotoFrame.Web.ViewModel;
+
 namespace PhotoFrame.Web.Controllers
 {
     [Authorize]
@@ -67,7 +69,6 @@ namespace PhotoFrame.Web.Controllers
             
             if (ModelState.IsValid)
             {
-                //Photo image = null;
                 if (upload != null && upload.ContentLength > 0)
                 {
                     int index = upload.FileName.LastIndexOf(".");
@@ -104,26 +105,138 @@ namespace PhotoFrame.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Photo photo = db.Photos.Find(id);
+            PhotoViewModel vm = new PhotoViewModel
+            {
+                Id = photo.Id,
+                FriendlyName = photo.FriendlyName,
+                PersonalDays=photo.PersonalDays
+            };
+            PopulateAssignedPersonalDays(ref vm,photo);
             if (photo == null)
             {
                 return HttpNotFound();
             }
-            return View(photo);
+            return View(vm);
         }
 
+        private void PopulateAssignedPersonalDays(ref PhotoViewModel vm,Photo photo)
+        {
+            //var allPDs = db.PersonalDays;
+            var msPDs=db.PersonalDays.Select(c => new{
+                Id=c.Id,
+                Name=c.Name
+            }).ToList();
+            //var photoPDs = new HashSet<int>(photo.PersonalDays.Select(p => p.Id));
+            //var assignedDays = new List<PersonalDay>();
+            //var allDays = new List<PersonalDay>();
+            //foreach (var pd in allPDs)
+            //{
+            //    PersonalDay tempDay = new PersonalDay
+            //        {
+            //            Id = pd.Id,
+            //            Name = pd.Name,
+            //            Month = pd.Month,
+            //            Day = pd.Day,
+            //            OriginalYear = pd.OriginalYear
+            //        };
+            //    allDays.Add(tempDay);
+            //    if (photoPDs.Contains(pd.Id))
+            //    {
+            //        assignedDays.Add(tempDay);
+            //    }
+            //}
+            //vm.PersonalDays = assignedDays;
+            //vm.AllPersonalDays = allDays;
+            ViewBag.AllPersonalDays = new MultiSelectList(msPDs,"Id","Name");
+        }
         // POST: /Photo/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,FileName,FriendlyName,UploadDate,Bytes,MimeType,FileExtension")] Photo photo)
+        public async Task<ActionResult> EditPhotoViewModel([Bind(Include = "Id,FriendlyName")] PhotoViewModel vm, int[] personalDaysIds, HttpPostedFileBase upload)
         {
+            var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
+            Photo photo = (from p in db.Photos where p.Id == vm.Id select p).FirstOrDefault();
             if (ModelState.IsValid)
             {
+                if (photo != null)
+                {
+                    //Handle FriendlyName
+                    if (photo.FriendlyName != vm.FriendlyName)
+                    {
+                        photo.FriendlyName = vm.FriendlyName;
+                    }
+                    //Handle updated image
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        int index = upload.FileName.LastIndexOf(".");
+                        string extension = upload.FileName.Substring(index);
+
+                        photo.User = currentUser;
+                        photo.FileName = System.IO.Path.GetFileName(upload.FileName);
+                        photo.FriendlyName = vm.FriendlyName;
+                        photo.UploadDate = DateTime.Now;
+                        photo.FileExtension = extension;
+                        photo.MimeType = upload.ContentType;
+
+                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                        {
+                            photo.Bytes = reader.ReadBytes(upload.ContentLength);
+                        }
+                    }
+                    //Handle Personal Days
+                    if (personalDaysIds != null && personalDaysIds.Length > 0)
+                    {
+                        List<PersonalDay> days = (from pd in db.PersonalDays where personalDaysIds.Contains(pd.Id) select pd).ToList<PersonalDay>();
+                        foreach (PersonalDay day in days)
+                        {
+                            //Is it in there already?
+                            if (!photo.PersonalDays.Contains(day))
+                            {
+                                photo.PersonalDays.Add(day);
+                            }
+                        }
+                    }
+                }
                 db.Entry(photo).State = EntityState.Modified;
-                db.SaveChanges();
+                db.SaveChanges();               
                 return RedirectToAction("Index");
             }
+            return View(photo);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "Id,FileName,FriendlyName,UploadDate,Bytes,MimeType,FileExtension")] Photo photo, HttpPostedFileBase upload)
+        {
+            var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
+
+            if (ModelState.IsValid)
+            {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    int index = upload.FileName.LastIndexOf(".");
+                    string extension = upload.FileName.Substring(index);
+
+                    photo.User = currentUser;
+                    photo.FileName = System.IO.Path.GetFileName(upload.FileName);
+                    photo.FriendlyName = photo.FriendlyName;
+                    photo.UploadDate = DateTime.Now;
+                    photo.FileExtension = extension;
+                    photo.MimeType = upload.ContentType;
+
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    {
+                        photo.Bytes = reader.ReadBytes(upload.ContentLength);
+                    }
+                    db.Entry(photo).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                }
+                return RedirectToAction("Index");
+            }
+            //PopulateAssignedPersonalDays(photo);
             return View(photo);
         }
 

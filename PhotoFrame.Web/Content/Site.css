@@ -44,8 +44,20 @@ input[type="checkbox"].input-validation-error {
     max-width:60px;
 }
 .mediumImage{
-    max-width:120px;
+    max-width:50%;
 }
 .largeImage{
-    max-width:240px;
+    max-width:85%;
+}
+
+.editPhotoFieldsDiv{
+    /*position:absolute;*/
+    top:0px;
+    left:0%;
+}
+.editPhotoImageDiv{
+position: absolute;
+    top: 155px;
+    left: 50%;
+    width: 50%;
 }

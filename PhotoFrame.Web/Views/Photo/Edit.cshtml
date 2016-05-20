@@ -1,4 +1,4 @@
-﻿@model PhotoFrame.Web.Models.Photo
+﻿@model PhotoFrame.Web.ViewModel.PhotoViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -8,23 +8,23 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("EditPhotoViewModel", "Photo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+    <div class="form-horizontal editPhotoFieldsDiv">
         <h4>Photo</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.FileName, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FileName)
                 @Html.ValidationMessageFor(model => model.FileName)
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.FriendlyName, new { @class = "control-label col-md-2" })
@@ -34,13 +34,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.UploadDate, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.UploadDate)
                 @Html.ValidationMessageFor(model => model.UploadDate)
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.Label("Upload", new { @class = "control-label col-md-2" })
@@ -48,46 +48,33 @@
                 <input type="file" id="Upload" name="upload" />
             </div>
         </div>
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.Bytes, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Bytes)
-                    @Html.ValidationMessageFor(model => model.Bytes)
-                </div>
-            </div>*@
+        <div class="form-group">
+            
+            <div class="col-md-10">
+                @Html.LabelFor(m => m.AllPersonalDays)
+                @*@Html.DropDownListFor(m => m.SelectedValue,*@
+                    @*new MultiSelectList(Model.AllPersonalDays, "Id", "Name"), "-Please select a personal day-")*@
+                @Html.DropDownList("PersonalDaysIds", (MultiSelectList)ViewBag.AllPersonalDays, new { multiple = "multiple", size = "12" })
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.MimeType, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.MimeType)
-                    @Html.ValidationMessageFor(model => model.MimeType)
-                </div>
-            </div>*@
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.FileExtension, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FileExtension)
-                    @Html.ValidationMessageFor(model => model.FileExtension)
-                </div>
-            </div>*@
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
-        @if (Model.Bytes.Length > 0)
-        {
-            <div class="form-group">
-                <div class="col-md-10">
-                    <img src="~/File?id=@Model.Id" alt="avatar" class="mediumImage" />
-                </div>
-            </div>
-        }
+        
     </div>
+    if (Model!=null)
+    {
+        <div class="form-group editPhotoImageDiv">
+            <div class="col-md-10">
+                <img src="~/File?id=@Model.Id" alt="avatar" class="largeImage" />
+            </div>
+        </div>
+    }
 }
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

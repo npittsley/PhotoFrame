@@ -210,6 +210,8 @@
     <Compile Include="Models\PhotoInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\AssignedPersonalDay.cs" />
+    <Compile Include="ViewModel\PhotoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\FileNotFound.png" />
