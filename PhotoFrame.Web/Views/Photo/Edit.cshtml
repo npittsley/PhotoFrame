@@ -49,16 +49,21 @@
             </div>
         </div>
         <div class="form-group">
-            
             <div class="col-md-10">
-                @Html.LabelFor(m => m.AllPersonalDays)
+                @Html.LabelFor(m => m.PersonalDays)
                 @*@Html.DropDownListFor(m => m.SelectedValue,*@
                     @*new MultiSelectList(Model.AllPersonalDays, "Id", "Name"), "-Please select a personal day-")*@
-                @Html.DropDownList("PersonalDaysIds", (MultiSelectList)ViewBag.AllPersonalDays, new { multiple = "multiple", size = "12" })
-
+                @Html.ListBox("PersonalDaysIds", (MultiSelectList)ViewBag.AllPersonalDays, new { multiple = "multiple", size = "12" })
             </div>
         </div>
-
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(m => m.Holidays)
+                @*@Html.DropDownListFor(m => m.SelectedValue,*@
+                @*new MultiSelectList(Model.AllPersonalDays, "Id", "Name"), "-Please select a personal day-")*@
+                @Html.ListBox("HolidaysIds", (MultiSelectList)ViewBag.AllHolidays, new { multiple = "multiple", size = "12" })
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

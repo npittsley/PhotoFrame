@@ -18,7 +18,6 @@ namespace PhotoFrame.Web.Controllers
     [Authorize]
     public class PhotoController : Controller
     {
-        //private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationDbContext db;
         private UserManager<ApplicationUser> manager;
 
@@ -31,8 +30,6 @@ namespace PhotoFrame.Web.Controllers
         public async Task<ActionResult> Index()
         {
             var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId()); 
-            //IEnumerable<Photo> photos=new List<Photo>();
-            //photos=db.Photos.Where(p => p.User==currentUser);
             return View(currentUser.Photos);
         }
 
@@ -109,52 +106,53 @@ namespace PhotoFrame.Web.Controllers
             {
                 Id = photo.Id,
                 FriendlyName = photo.FriendlyName,
+                PersonalDays = photo.PersonalDays,
+                Holidays=photo.Holidays
+            };
+            PopulateAssignedPersonalDays(ref vm, photo);
+            PopulateAssignedHolidays(ref vm, photo);
+            
+            /* This works
+            Photo photo = db.Photos.Find(id);
+            PhotoViewModel vm = new PhotoViewModel
+            {
+                Id = photo.Id,
+                FriendlyName = photo.FriendlyName,
                 PersonalDays=photo.PersonalDays
             };
             PopulateAssignedPersonalDays(ref vm,photo);
+            PopulateAssignedHolidays(ref vm, photo);
             if (photo == null)
             {
                 return HttpNotFound();
             }
+             * /
+             */
             return View(vm);
         }
-
         private void PopulateAssignedPersonalDays(ref PhotoViewModel vm,Photo photo)
         {
-            //var allPDs = db.PersonalDays;
             var msPDs=db.PersonalDays.Select(c => new{
                 Id=c.Id,
                 Name=c.Name
             }).ToList();
-            //var photoPDs = new HashSet<int>(photo.PersonalDays.Select(p => p.Id));
-            //var assignedDays = new List<PersonalDay>();
-            //var allDays = new List<PersonalDay>();
-            //foreach (var pd in allPDs)
-            //{
-            //    PersonalDay tempDay = new PersonalDay
-            //        {
-            //            Id = pd.Id,
-            //            Name = pd.Name,
-            //            Month = pd.Month,
-            //            Day = pd.Day,
-            //            OriginalYear = pd.OriginalYear
-            //        };
-            //    allDays.Add(tempDay);
-            //    if (photoPDs.Contains(pd.Id))
-            //    {
-            //        assignedDays.Add(tempDay);
-            //    }
-            //}
-            //vm.PersonalDays = assignedDays;
-            //vm.AllPersonalDays = allDays;
-            ViewBag.AllPersonalDays = new MultiSelectList(msPDs,"Id","Name");
+            ViewBag.AllPersonalDays = new MultiSelectList(msPDs,"Id","Name",vm.PersonalDays);
+        }
+        private void PopulateAssignedHolidays(ref PhotoViewModel vm, Photo photo)
+        {
+            var msHDs = db.Holidays.Select(c => new
+            {
+                Id = c.Id,
+                Name = c.Name
+            }).ToList();
+            ViewBag.AllHolidays = new MultiSelectList(msHDs, "Id", "Name",vm.Holidays);
         }
         // POST: /Photo/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditPhotoViewModel([Bind(Include = "Id,FriendlyName")] PhotoViewModel vm, int[] personalDaysIds, HttpPostedFileBase upload)
+        public async Task<ActionResult> EditPhotoViewModel([Bind(Include = "Id,FriendlyName")] PhotoViewModel vm, int[] personalDaysIds,int[]holidaysIds, HttpPostedFileBase upload)
         {
             var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
             Photo photo = (from p in db.Photos where p.Id == vm.Id select p).FirstOrDefault();
@@ -195,6 +193,19 @@ namespace PhotoFrame.Web.Controllers
                             if (!photo.PersonalDays.Contains(day))
                             {
                                 photo.PersonalDays.Add(day);
+                            }
+                        }
+                    }
+                    //Handle HoliDays
+                    if (holidaysIds != null && holidaysIds.Length > 0)
+                    {
+                        List<Holiday> days = (from hd in db.Holidays where holidaysIds.Contains(hd.Id) select hd).ToList<Holiday>();
+                        foreach (Holiday day in days)
+                        {
+                            //Is it in there already?
+                            if (!photo.Holidays.Contains(day))
+                            {
+                                photo.Holidays.Add(day);
                             }
                         }
                     }

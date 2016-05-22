@@ -16,11 +16,16 @@ namespace PhotoFrame.Web.ViewModel
         [Required(ErrorMessage = "required")]
         public string FriendlyName { get; set; }
 
-        public int SelectedValue { get; set; }
         [DisplayName("Assigned Personal Days")]
         public virtual ICollection<PersonalDay> PersonalDays { get; set; }
 
-        [DisplayName("All Personal Days")]
-        public virtual ICollection<PersonalDay> AllPersonalDays { get; set; }
+        [DisplayName("Assigned Holidays")]
+        public virtual ICollection<Holiday> Holidays { get; set; }
+
+        //[DisplayName("All Personal Days")]
+        //public virtual ICollection<PersonalDay> AllPersonalDays { get; set; }
+
+        //[DisplayName("All Holidays")]
+        //public virtual ICollection<PersonalDay> AllHolidays { get; set; }
     }
 }
