@@ -4,53 +4,72 @@
     ViewBag.Title = "Log in";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
+@*<h2>@ViewBag.Title.</h2>*@
+<div class="pfSiteContent">
+    <div class="">
+        <section id="loginForm" class="containerCentered">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
+                @*<h4>Use a local account to log in.</h4>*@
+                @*<hr />*@
                 @Html.ValidationSummary(true)
-                <div class="form-group">
-                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                <div class="">
+                    <p>
+                        <img src="~/Content/Images/PFLogo.gif" />
+                        <img src="~/Content/Images/PFBrand.gif" />
+                    </p>
+                </div>
+                <div class="">
+                    @*@Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })*@
+                    <div class="">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control pfLoginTextbox" })
                         @Html.ValidationMessageFor(m => m.UserName)
                     </div>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                <div class="">
+                    @*@Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })*@
+                    <div class="">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control pfLoginTextbox" })
                         @Html.ValidationMessageFor(m => m.Password)
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                @*<div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
                         </div>
-                    </div>
+                    </div>*@
+                <div class="largeButton">
+                    <input type="submit" value="Log in" class="pfLoginBtn" />
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
+                <div id="socialLogin">
+                    <p>
+                        @*@Html.ActionLink()*@
+                    </p>
+                    <p>
+
+                    </p>
                 </div>
-                <p>
-                    @Html.ActionLink("Register", "Register") if you don't have a local account.
-                </p>
+
             }
         </section>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
+    <div class="">
+        <section id="socialLoginForm" class="containerCentered">
             @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
         </section>
+    </div>
+    <hr/>
+    <div class="containerCentered loginHelp">
+        @Html.ActionLink("Need help logging in?","LoginHelp","Link")
+    </div>
+    <div class="invertedButton">
+        @*<p>*@
+            @Html.ActionLink("Sign Up for Free!", "Register")
+        @*</p>*@
     </div>
 </div>
 @section Scripts {

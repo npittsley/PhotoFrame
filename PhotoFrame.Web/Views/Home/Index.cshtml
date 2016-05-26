@@ -2,32 +2,28 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Photo Frame by Leap Lily</h1>
-    <p class="lead">Photo Frame is a free application for organizing your photos.</p>
-    <p class="lead">You can use this application to setup the calendar for you.</p>
-    <p class="lead">Magic Mirror photoframe APP.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
+<div class="pfHomeBackground">
+    @*<h1>Manage your</h1>*@
+    @*<h1>Photo Frame Here</h1>*@
+    @*<p class="lead">Photo Frame is a <strong>free</strong> application for organizing your photos.</p>*@
+    @*<p class="lead">You can use this application to setup the calendar for your</p>*@
+    @*<p class="lead">Magic Mirror photoframe APP.</p>*@
+    <div class="containerCentered brandBackground">
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            <img src="~/Content/Images/PFLogo.gif" />
+            <img src="~/Content/Images/PFBrand.gif" />
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="titleBackground titleFont">
+        <p>Manage your</p>
+        @*<p>Magic Mirror and</p>*@
+        <p>Photo Frame Here</p>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="largeButton">
+            @*<a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a>*@
+            @Html.ActionLink("Log In", "Login", "Account")
+    </div>
+    <div class="largeButton">
+            @Html.ActionLink("Sign Up for Free!", "Register", "Account")
     </div>
 </div>

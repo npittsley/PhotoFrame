@@ -9,32 +9,59 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Photo Frame", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+    @using Microsoft.AspNet.Identity
+    @if (Request.IsAuthenticated)
+    {
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @*<a href="@Url.Action("Index","Home")" class="navbar-brand">
+                            <img src="@Url.Content("~/Content/Images/PhotoFrameLogo.png")" />
+                        </a>*@
+                </div>
+                <div class="navbar-collapse collapse">
+
+                    @*<ul class="nav navbar-nav navbar-brand">*@
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                    @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
+                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                    @*</ul>*@
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
+    }
+    <div class="container body-content pfSiteBackground">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Photo Frame by LeapLily</p>
-        </footer>
+        <hr class="footerHr" />
+        <div class="footerMain">
+            <footer class="footerRight">
+                <div class="containerCentered">
+                    <ul>
+                        <li class="footerCopyright">&copy; @DateTime.Now.Year - Photo Frame Inc.</li>
+                        <li>
+                            @Html.ActionLink("Privacy", "Privacy", "Links")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Legal", "Legal", "Links")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Contact Us", "ContactUs", "Links")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Careers", "Careers", "Links")
+                        </li>
+                    </ul>
+
+                </div>
+            </footer>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

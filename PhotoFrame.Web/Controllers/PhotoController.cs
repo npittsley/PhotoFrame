@@ -29,8 +29,9 @@ namespace PhotoFrame.Web.Controllers
         // GET: /Photo/
         public async Task<ActionResult> Index()
         {
-            var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId()); 
-            return View(currentUser.Photos);
+            var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
+            PhotoThumbsViewModel vm = new PhotoThumbsViewModel(currentUser.Photos);
+            return View(vm.thumbnails);
         }
 
         // GET: /Photo/Details/5

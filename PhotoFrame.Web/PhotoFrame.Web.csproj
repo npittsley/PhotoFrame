@@ -196,6 +196,7 @@
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HolidayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LinksController.cs" />
     <Compile Include="Controllers\PersonalDayController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -208,6 +209,7 @@
     <Compile Include="Models\PersonalDay.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\PhotoInitializer.cs" />
+    <Compile Include="Models\PhotoThumbsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\AssignedPersonalDay.cs" />
@@ -219,6 +221,17 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\FacebookLogin.gif" />
+    <Content Include="Content\Images\GoogleLogin.gif" />
+    <Content Include="Content\Images\HomeBack.png" />
+    <Content Include="Content\Images\PhotoFrameLogo.png" />
+    <Content Include="Content\SourceImages\FacebookLogin.png" />
+    <Content Include="Content\SourceImages\GoogleLogin.png" />
+    <Content Include="Content\SourceImages\HomeBack.png" />
+    <Content Include="Content\Images\PFBrand.gif" />
+    <Content Include="Content\SourceImages\PFBrand.png" />
+    <Content Include="Content\Images\PFLogo.gif" />
+    <Content Include="Content\SourceImages\PFLogo.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -232,6 +245,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\SourceImages\PFArt.pdn" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -290,6 +304,11 @@
     <Content Include="Views\Photo\Details.cshtml" />
     <Content Include="Views\Photo\Edit.cshtml" />
     <Content Include="Views\Photo\Index.cshtml" />
+    <Content Include="Views\Links\Privacy.cshtml" />
+    <Content Include="Views\Links\Legal.cshtml" />
+    <Content Include="Views\Links\ContactUs.cshtml" />
+    <Content Include="Views\Links\Careers.cshtml" />
+    <Content Include="Views\Links\LoginHelp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\File\" />
