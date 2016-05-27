@@ -8,22 +8,23 @@
     @*<p class="lead">Photo Frame is a <strong>free</strong> application for organizing your photos.</p>*@
     @*<p class="lead">You can use this application to setup the calendar for your</p>*@
     @*<p class="lead">Magic Mirror photoframe APP.</p>*@
-    <div class="containerCentered brandBackground">
+    @*<div class="containerCentered brandBackground">
         <p>
             <img src="~/Content/Images/PFLogo.gif" />
             <img src="~/Content/Images/PFBrand.gif" />
         </p>
-    </div>
+    </div>*@
+    @Html.Partial("_Brand")
     <div class="titleBackground titleFont">
         <p>Manage your</p>
         @*<p>Magic Mirror and</p>*@
         <p>Photo Frame Here</p>
     </div>
-    <div class="largeButton">
-            @*<a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a>*@
-            @Html.ActionLink("Log In", "Login", "Account")
+    <div class="containerCentered pfButton largeButton">
+        @*<a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a>*@
+        @Html.ActionLink("Log In", "Login", "Account")
     </div>
-    <div class="largeButton">
-            @Html.ActionLink("Sign Up for Free!", "Register", "Account")
+    <div class="containerCentered pfButton largeButton">
+        @Html.ActionLink("Sign Up for Free!", "Register", "Account")
     </div>
 </div>

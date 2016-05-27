@@ -30,31 +30,32 @@ namespace PhotoFrame.Web.Models
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var myinfo = new UserProfile() { FirstName = "PhotoFrame", LastName = "Admin" };
-            string name = "Admin";
-            string password = "123456";
-            string test = "test";
+            string username = "Admin";
+            string rolename = "Administrator";
+
+            string password = "December";
+            //string test = "test";
 
             //Create Role Test and User Test
-            RoleManager.Create(new IdentityRole(test));
-            UserManager.Create(new ApplicationUser() { UserName = test });
+            //RoleManager.Create(new IdentityRole(test));
+            //UserManager.Create(new ApplicationUser() { UserName = test });
 
             //Create Role Admin if it does not exist
-            if (!RoleManager.RoleExists(name))
+            if (!RoleManager.RoleExists(rolename))
             {
-                var roleresult = RoleManager.Create(new IdentityRole(name));
+                var roleresult = RoleManager.Create(new IdentityRole(rolename));
             }
 
             //Create User=Admin with password=123456
             var user = new ApplicationUser();
-            user.UserName = name;
-            //user. = "Seattle";
+            user.UserName = username;
             user.Profile = myinfo;
             var adminresult = UserManager.Create(user, password);
 
             //Add User Admin to Role Admin
             if (adminresult.Succeeded)
             {
-                var result = UserManager.AddToRole(user.Id, name);
+                var result = UserManager.AddToRole(user.Id, rolename);
             }
         }
         private void InitPhotos(ApplicationDbContext context)

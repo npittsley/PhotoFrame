@@ -309,6 +309,7 @@
     <Content Include="Views\Links\ContactUs.cshtml" />
     <Content Include="Views\Links\Careers.cshtml" />
     <Content Include="Views\Links\LoginHelp.cshtml" />
+    <Content Include="Views\Shared\_Brand.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\File\" />

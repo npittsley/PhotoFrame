@@ -5,7 +5,7 @@
 }
 
 @*<h2>@ViewBag.Title.</h2>*@
-<div class="pfSiteContent">
+<div class="pfSmallContent">
     <div class="">
         <section id="loginForm" class="containerCentered">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -14,12 +14,7 @@
                 @*<h4>Use a local account to log in.</h4>*@
                 @*<hr />*@
                 @Html.ValidationSummary(true)
-                <div class="">
-                    <p>
-                        <img src="~/Content/Images/PFLogo.gif" />
-                        <img src="~/Content/Images/PFBrand.gif" />
-                    </p>
-                </div>
+                @Html.Partial("_Brand")
                 <div class="">
                     @*@Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })*@
                     <div class="">
@@ -42,7 +37,7 @@
                             </div>
                         </div>
                     </div>*@
-                <div class="largeButton">
+                <div class="containerCentered pfButtton largeButton">
                     <input type="submit" value="Log in" class="pfLoginBtn" />
                 </div>
                 <div id="socialLogin">
@@ -62,13 +57,13 @@
             @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
         </section>
     </div>
-    <hr/>
+    <hr />
     <div class="containerCentered loginHelp">
-        @Html.ActionLink("Need help logging in?","LoginHelp","Link")
+        @Html.ActionLink("Need help logging in?", "LoginHelp", "Links")
     </div>
-    <div class="invertedButton">
+    <div class="containerCentered pfButton largeButton inverted">
         @*<p>*@
-            @Html.ActionLink("Sign Up for Free!", "Register")
+        @Html.ActionLink("Sign Up for Free!", "Register")
         @*</p>*@
     </div>
 </div>
