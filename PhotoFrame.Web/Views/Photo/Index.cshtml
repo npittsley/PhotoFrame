@@ -1,74 +1,107 @@
 ﻿@model IEnumerable<PhotoFrame.Web.Models.Photo>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Your Photos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FileName)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.FileName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FriendlyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UploadDate)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Bytes)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.MimeType)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.FileExtension)
-        </th>*@
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        @if (item!=null)
+<div class="pfSiteContent">
+    <div class="">
+        <h4><strong>Manage @ViewBag.Title</strong></h4>
+    </div>
+    <div class="pfButton mediumButton">
+        @Html.ActionLink("Add New", "Create")
+    </div>
+    <button class="pfButton mediumButton" value="Change View" onclick="togglePhotoView()">Change View</button>
+    <div class="photoGallery">
+        @foreach (var item in Model)
         {
-            <td>
-                <img src="~/File?id=@item.Id" alt="avatar" class="smallImage" />
-            </td>
-        }
-        <td>
-            @Html.DisplayFor(modelItem => item.FileName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FriendlyName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UploadDate)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Bytes)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.MimeType)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.FileExtension)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+            @*<tr>*@
+            if (item != null)
+            {
 
-</table>
+                <div class="photoGalleryImg">
+                    <a href="@Url.Action("Edit", "Photo", new { id = item.Id })">
+                        <img src="~/File/GetSmallImage?id=@item.Id" alt="avatar" class="" />
+                    </a>
+                    <div class="photoGalleryDesc">
+                        @foreach (var day in item.Holidays)
+                        {
+                            <div>@day.Name</div>
+                        }
+                        @foreach (var day in item.PersonalDays)
+                        {
+                            <div>@day.Name</div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="">
+        <table class="table photoGrid">
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.FriendlyName)*@
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FriendlyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FileName)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.UploadDate)
+                </th>
+                @*<th></th>*@
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @if (item != null)
+                    {
+                        <td class="imageThumbCell">
+                            <table>
+                                <tr>
+                                    <td class="containerCentered">
+                                        <a href="@Url.Action("Edit", "Photo", new { id = item.Id })">
+                                            <img src="~/File/GetThumbnail?id=@item.Id" alt="avatar" class="smallImage" />
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="imageBtnCell">
+                                        <div class="pfButton smallButton">
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                        </div>
+                                    </td>
+                                    <td class="imageBtnCell">
+                                        <div class="pfButton smallButton">
+                                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                                        </div>
+                                    </td>
+                                    <td class="imageBtnCell">
+                                        <div class="pfButton smallButton">
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FriendlyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UploadDate)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="footerFix">
+</div>

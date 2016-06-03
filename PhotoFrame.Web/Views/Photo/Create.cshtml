@@ -1,84 +1,40 @@
 ﻿@model PhotoFrame.Web.Models.Photo
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Photo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Create</h2>
 
 
 @using (Html.BeginForm("Create", "Photo", null, FormMethod.Post, new {enctype = "multipart/form-data"})) 
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Photo</h4>
-        <hr />
+
+    <div class="pfSiteContent">
+        <div class="">
+            <h4><strong>Manage @ViewBag.Title</strong></h4>
+        </div>
         @Html.ValidationSummary(true)
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.FileName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FileName)
-                @Html.ValidationMessageFor(model => model.FileName)
-            </div>
-        </div>*@
-
         <div class="form-group">
-            @Html.LabelFor(model => model.FriendlyName, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FriendlyName, new { @class = "control-label col-md-2 pfLabel" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FriendlyName)
+                @Html.EditorFor(model => model.FriendlyName, new {@class="pfTextbox" })
                 @Html.ValidationMessageFor(model => model.FriendlyName)
             </div>
         </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.UploadDate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UploadDate)
-                @Html.ValidationMessageFor(model => model.UploadDate)
+        @*<div class="form-group">*@
+            @Html.Label("Upload", new { @class = "control-label col-md-2 pfLabel" })
+            <div class="uploadButton">
+                <input type="file" id="Upload" name="upload" class="pfButton largeButton" />
             </div>
-        </div>*@
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Bytes, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Bytes)
-                @Html.ValidationMessageFor(model => model.Bytes)
+        @*</div>*@
+            <div class="">
+                <input type="submit" value="Upload" class="pfButton mediumButton" />
             </div>
-        </div>*@
-        <div class="form-group">
-            @Html.Label("Upload", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" id="Upload" name="upload" />
-            </div>
-        </div>
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.MimeType, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MimeType)
-                @Html.ValidationMessageFor(model => model.MimeType)
-            </div>
-        </div>*@
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.FileExtension, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FileExtension)
-                @Html.ValidationMessageFor(model => model.FileExtension)
-            </div>
-        </div>*@
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
 }
 
-<div>
+<div class="pfButton largeButton inverted">
     @Html.ActionLink("Back to List", "Index")
 </div>
 

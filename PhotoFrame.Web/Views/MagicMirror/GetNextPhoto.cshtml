@@ -1,0 +1,28 @@
+﻿@model PhotoFrame.Web.Models.Photo
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetNextPhoto</title>
+</head>
+<body>
+    <div>
+        <h4>Photo</h4>
+        <hr />
+        <div>@Html.ActionLink("Get Next Photo", "GetNextPhoto", "MagicMirror")</div>
+        <div class="containerCentered">
+            <img src="~/File?id=@Model.Id" alt="avatar" class="maxImage" />
+        </div>
+    </div>
+    @*<p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
+</body>
+</html>

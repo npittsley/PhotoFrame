@@ -14,6 +14,7 @@ namespace PhotoFrame.Web.ViewModel
         public int Id { get; set; }
 
         [Required(ErrorMessage = "required")]
+        [DisplayName("Name")]
         public string FriendlyName { get; set; }
 
         [DisplayName("Assigned Personal Days")]

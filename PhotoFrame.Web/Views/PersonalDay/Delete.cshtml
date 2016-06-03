@@ -54,11 +54,14 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="pfButton mediumButton" />
+        </div>
+        <div class="pfButton mediumButton inverted">
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

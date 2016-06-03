@@ -33,7 +33,12 @@ namespace PhotoFrame.Web.Controllers
             PhotoThumbsViewModel vm = new PhotoThumbsViewModel(currentUser.Photos);
             return View(vm.thumbnails);
         }
-
+        public async Task<ActionResult> GetNextPhoto()
+        {
+            var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
+            PhotoThumbsViewModel vm = new PhotoThumbsViewModel(currentUser.Photos);
+            return View();
+        }
         // GET: /Photo/Details/5
         public ActionResult Details(int? id)
         {

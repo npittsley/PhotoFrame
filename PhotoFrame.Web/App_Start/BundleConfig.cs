@@ -23,9 +23,18 @@ namespace PhotoFrame.Web
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datetime").Include(
+                        "~/Scripts/moment*",
+                        "~/Scripts/bootstrap-datetimepicker*",
+                        "~/Scripts/App/PhotoFrame.js")
+                        );
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-datepicker3.css",
                       "~/Content/Site.css"));
+
+
         }
     }
 }

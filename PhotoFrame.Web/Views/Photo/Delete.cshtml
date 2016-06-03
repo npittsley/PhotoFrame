@@ -36,38 +36,61 @@
             @Html.DisplayFor(model => model.UploadDate)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Bytes)
-        </dt>
+        @*<dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Bytes)
-        </dd>
+            </dt>
+            <dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MimeType)
-        </dt>
+            </dd>*@
+        @*<dt>
+                @Html.DisplayNameFor(model => model.Bytes)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MimeType)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Bytes)
+            </dd>*@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FileExtension)
-        </dt>
+        @*<dt>
+                @Html.DisplayNameFor(model => model.MimeType)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FileExtension)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.MimeType)
+            </dd>*@
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.FileExtension)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FileExtension)
+            </dd>*@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+    <div class="form-actions no-color">
+        @if (Model != null)
+        {
+            <div class="form-group">
+                <div class="col-md-10">
+                    <img src="~/File?id=@Model.Id" alt="avatar" class="mediumImage" />
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Delete" class="pfButton mediumButton" />
+            </div>
         </div>
+        <div class="form-group">
+            <div class="pfButton mediumButton inverted">
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
     }
-</div>
+

@@ -43,6 +43,7 @@ namespace PhotoFrame.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            if (String.IsNullOrEmpty(returnUrl)) returnUrl = "/photo";
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
